@@ -1,10 +1,3 @@
-"""
-2026 World Cup Data Science Hub
-================================
-Combined entry point: match prediction, player dashboard, sentiment tracker.
-Run with: streamlit run app.py
-"""
-
 import streamlit as st
 
 st.set_page_config(
