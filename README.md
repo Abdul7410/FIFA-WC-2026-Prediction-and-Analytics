@@ -1,4 +1,4 @@
-# ⚽ 2026 FIFA World Cup — Data Science Hub
+# ⚽ 2026 FIFA World Cup 
 
 A combined, production-ready data science project uniting three modules into a single Streamlit app.
 
