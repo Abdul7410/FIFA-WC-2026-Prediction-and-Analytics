@@ -45,8 +45,8 @@ worldcup2026/
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/YOUR_USERNAME/worldcup2026-ds.git
-cd worldcup2026-ds
+git clone https://github.com/Abdul7410/FIFA-WC-2026-Prediction-and-Analytics.git
+cd FIFA-WC-2026-Prediction-and-Analytics
 
 # 2. Create virtual environment
 python -m venv venv
