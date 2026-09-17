@@ -133,3 +133,38 @@ def get_market_value_trend(player_id: int) -> pd.DataFrame:
     """Return valuation history for a single player."""
     vals = load_valuations()
     return vals[vals["player_id"] == player_id].sort_values("date")
+
+if __name__ == "__main__":
+    print("Loading player data...")
+    
+    df = build_player_stats(min_minutes=500)
+    print(f"Players after filtering: {len(df):,}")
+
+    print("\nRunning K-means clustering...")
+    clustered = cluster_players(df, n_clusters=5)
+
+    print("\n=== CLUSTER COUNTS ===")
+    print(clustered["cluster_label"].value_counts().sort_index())
+
+    print("\n=== CLUSTER STATISTICS ===")
+    stats = (
+        clustered.groupby(["cluster", "cluster_label"])[FEATURE_COLS]
+        .mean()
+        .round(3)
+    )
+    print(stats.to_string())
+
+    print("\n=== PCA EXPLAINED VARIANCE ===")
+    X = clustered[FEATURE_COLS]
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+    pca = PCA(n_components=2, random_state=42)
+    pca.fit(X_scaled)
+    print(
+        f"PC1: {pca.explained_variance_ratio_[0]:.3f}, "
+        f"PC2: {pca.explained_variance_ratio_[1]:.3f}"
+    )
+    print(
+        f"Total variance explained: "
+        f"{pca.explained_variance_ratio_.sum():.3f}"
+    )
